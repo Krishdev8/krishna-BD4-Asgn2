@@ -13,10 +13,15 @@ app.use(express.static('static'));
 let db;
 
 (async () => {
-  db = await open({
-    filename: './BD4_Asgn2/database.sqlite',
-    driver: sqlite3.Database,
-  });
+  try {
+    db = await open({
+      filename: './database.sqlite',
+      driver: sqlite3.Database,
+    });
+    console.log('Database connected successfully');
+  } catch (error) {
+    console.error('Failed to connect to the database:', error);
+  }
 })();
 
 //Exercise 1: Get All Games
